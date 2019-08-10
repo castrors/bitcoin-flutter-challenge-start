@@ -35,12 +35,12 @@ const bitcoinAverageURL =
     'https://apiv2.bitcoinaverage.com/indices/global/ticker';
 
 class CoinData {
-  Future<double> getCoinData() async {
+  Future getCoinData({String currency}) async {
 
-    http.Response response = await http.get('$bitcoinAverageURL/BTCUSD');
+    http.Response response = await http.get('$bitcoinAverageURL/BTC$currency');
     if (response.statusCode == 200) {
       String data = response.body;
-      return jsonDecode(data)['last'];
+      return jsonDecode(data)['last'].toStringAsFixed(0);
     } else {
       print(response.statusCode);
       throw 'Problem with the get request';
