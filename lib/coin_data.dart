@@ -42,7 +42,8 @@ class CoinData {
       String data = response.body;
       return jsonDecode(data)['last'];
     } else {
-      return 0.0;
+      print(response.statusCode);
+      throw 'Problem with the get request';
     }
   }
 }
